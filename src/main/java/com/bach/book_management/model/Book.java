@@ -1,5 +1,6 @@
 package com.bach.book_management.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,8 +22,9 @@ public class Book {
     String name;
     String publisher;
     LocalDate publicationDate;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "author_id")
+    @JsonIgnore
     Author author;
 
 }
